@@ -17,14 +17,13 @@
 
 <script>
 
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import { fetchAll } from '@/api/country'
 import List from './List'
 import SimpleSelect from '@/components/SimpleSelect'
 import InputField from '@/components/InputField'
 
 function setup (_props, { emit }) {
-  const input = ref(null)
   const state = reactive({
     all: [],
     display: [],
@@ -65,12 +64,11 @@ function setup (_props, { emit }) {
         ? setFilter(curType)
         : (state.display = state.all)
 
-      return
+    } else {
+      state.display = state.display.filter(({ name }) => (
+        name.toLowerCase().includes(value)
+      ))
     }
-
-    state.display = state.display.filter(({ name }) => (
-      name.toLowerCase().includes(value)
-    ))
   }
 
   function setFilter (type) {
@@ -81,12 +79,7 @@ function setup (_props, { emit }) {
   }
 
   function callFilter (type) {
-    if (state.curType === type) {
-      return
-    }
-    
-    console.log(input)
-    setFilter(type)
+    state.curType !== type && setFilter(type)
   }
 
   emit('loading', true)

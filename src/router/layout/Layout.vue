@@ -5,14 +5,14 @@
       <router-view v-slot="{ Component }">
         <view-loader v-show="state.isLoading" key="loader" />
           <keep-alive>
-        <transition name="slide-left" mode="in-out">
-            <component
-              v-show="!state.isLoading"
-              key="router-render"
-              :is="Component"
-              @loading="isLoading"
-            />
-        </transition>
+            <transition name="slide-left" mode="in-out">
+              <component
+                v-show="!state.isLoading"
+                key="router-render"
+                :is="Component"
+                @loading="isLoading"
+              />
+            </transition>
           </keep-alive>
       </router-view>
     </div>

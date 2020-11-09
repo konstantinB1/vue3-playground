@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { reactive, onMounted, ref, watch, onUnmounted } from 'vue'
+import { reactive, ref, onMounted, onUnmounted, watch } from 'vue'
 import { debounce } from 'lodash'
 
 function setup (props) {
