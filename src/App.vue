@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <theme :theme="state.theme">
+    <router-view @theme="setTheme" />
+  </theme>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+import Theme from './Theme'
+import { reactive } from 'vue'
+
+function setup () {
+  const storageItem = localStorage.getItem('countries_theme')
+  const state = reactive({
+    theme: storageItem || 'light'
+  })
+
+  function setTheme (type) {
+    state.theme = type
+  }
+
+  return {
+    setTheme,
+    state
   }
 }
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+export default {
+  components: {
+    Theme
+  },
+
+  setup
 }
-</style>
+</script>

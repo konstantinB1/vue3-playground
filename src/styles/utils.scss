@@ -1,0 +1,22 @@
+@mixin container {
+  width: 1380px;
+  margin: auto;
+
+  @include bp(1440px) {
+    max-width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include bp(375px) {
+    width: 375px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+@mixin bp ($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
